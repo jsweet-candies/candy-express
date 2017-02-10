@@ -1,15 +1,16 @@
 package def.express.express_lib_application;
-import def.node.net.ListenOptions;
-import def.node.net.Server;
-import jsweet.util.union.Union4;
 import def.express.express_lib_router_index.ErrorHandler;
 import def.express.express_lib_router_index.ParamHandler;
 import def.express.express_lib_router_index.RequestHandler;
 import def.express.express_lib_router_index.Router;
 import def.express.express_lib_router_route.Route;
 import def.js.Error;
-import def.js.RegExp;
 import def.js.Function;
+import def.js.RegExp;
+import def.node.net.ListenOptions;
+import def.node.net.Server;
+import jsweet.util.union.Union;
+import jsweet.util.union.Union4;
 
 @jsweet.lang.Interface
 @jsweet.lang.Extends({Router.class})
@@ -207,7 +208,14 @@ public abstract class Application extends def.js.Object {
          * response and not the source text of the process, unless that text happens to be
          * the output of the process.
          */
-    native public Application get(Union4<String, RegExp, String[], RegExp[]> path, Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
+    native public Application get(String path, Union<RequestHandler, ErrorHandler>... handlers);
+    native public Application get(RegExp path, Union<RequestHandler, ErrorHandler>... handlers);
+    native public Application get(String path, RequestHandler... handlers);
+    native public Application get(String path, ErrorHandler... handlers);
+    native public Application get(RegExp path, RequestHandler... handlers);
+    native public Application get(RegExp path, ErrorHandler... handlers);
+    
+    
     /**
          * The POST method is used to request that the origin server accept the entity
          * enclosed in the request as a new subordinate of the resource identified by the
@@ -386,9 +394,19 @@ public abstract class Application extends def.js.Object {
          * can dynamically switch to being a tunnel (e.g. SSL tunneling).
          */
     native public Application connect(Union4<String, RegExp, String[], RegExp[]> path, Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
-    native public Application use(Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
-    native public Application use(String mountPoint, Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
-    native public Route route(Union4<String, RegExp, String[], RegExp[]> prefix);
+    
+    native public Application use(ErrorHandler... handlers);
+    native public Application use(RequestHandler... handlers);
+    native public Application use(Union<RequestHandler, ErrorHandler>... handlers);
+    native public Application use(String mountPoint, Union<RequestHandler, ErrorHandler>... handlers);
+    native public Application use(String mountPoint, RequestHandler... handlers);
+    native public Application use(String mountPoint, ErrorHandler... handlers);
+    
+    native public Application use(RegExp mountPoint, Union<RequestHandler, ErrorHandler>... handlers);
+    native public Application use(String[] mountPoint, Union<RequestHandler, ErrorHandler>... handlers);
+    native public Application use(RegExp[] mountPoint, Union<RequestHandler, ErrorHandler>... handlers);
+    
+    native public Route route(Union<String, RegExp>... prefix);
     /**
          * Render the given view `name` name with `options`
          * and a callback accepting an error and the
@@ -487,8 +505,6 @@ public abstract class Application extends def.js.Object {
          * provide req.user to the route, or perform validations on the parameter input.
          */
     native public Application param(String[] name, ParamHandler handler);
-    native public Application use(RegExp mountPoint, Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
-    native public Application use(String[] mountPoint, Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
-    native public Application use(RegExp[] mountPoint, Union4<RequestHandler, ErrorHandler, RequestHandler[], ErrorHandler[]>... handlers);
+    
 }
 
