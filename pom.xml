@@ -7,7 +7,7 @@
 	<properties>
 		<jsweet.transpiler.version>2.0.0</jsweet.transpiler.version>
 	</properties>
-		<repositories>
+	<repositories>
 		<repository>
 			<id>jsweet-central</id>
 			<name>libs-release</name>
@@ -44,7 +44,6 @@
 			<artifactId>node</artifactId>
 			<version>7.5.0</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -65,30 +64,28 @@
 				</configuration>
 			</plugin>
 			
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.jsweet</groupId> -->
-<!-- 				<artifactId>jsweet-maven-plugin</artifactId> -->
-<!-- 				<version>2.0.0-SNAPSHOT</version> -->
-<!-- 				<configuration> -->
-<!-- 					<verbose>true</verbose> -->
-<!-- 					<bundle>true</bundle> -->
-<!-- 					<tsOut>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}</tsOut> -->
-<!-- 					<targetVersion>ES5</targetVersion> -->
-<!-- 					<excludes> -->
-<!-- 						<exclude>**jsweet/util/function/**</exclude> -->
-<!-- 					</excludes> -->
-<!-- 				</configuration> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<id>generate-js</id> -->
-<!-- 						<phase>generate-sources</phase> -->
-<!-- 						<goals> -->
-<!-- 							<goal>jsweet</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
-			
+			<plugin>
+				<groupId>org.jsweet</groupId>
+				<artifactId>jsweet-maven-plugin</artifactId>
+				<version>2.0.0-SNAPSHOT</version>
+				<configuration>
+					<verbose>true</verbose>
+					<bundle>true</bundle>
+					<outDir>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}/sources</outDir>
+					<tsOut>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}/sources</tsOut>
+					<targetVersion>ES6</targetVersion>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-js</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>jsweet</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
@@ -98,9 +95,9 @@
 						<configuration>
 							<target>
 								<echo message="copying generated bundles to dist..." />
-								
+
 								<mkdir dir="dist/"></mkdir>
-								
+
 								<copy
 									file="src/main/resources/src/typings/${project.artifactId}/${project.version}/bundle.d.ts"
 									tofile="dist/${project.artifactId}.d.ts" verbose="true"
@@ -132,7 +129,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -158,7 +155,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
