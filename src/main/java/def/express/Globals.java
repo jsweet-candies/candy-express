@@ -27,9 +27,9 @@ public final class Globals {
  * The file to serve will be determined by combining req.url with the provided root directory.
  * When a file is not found, instead of sending a 404 response, this module will instead call next() to move on to the next middleware, allowing for stacking and fall-backs.
  */
-    @jsweet.lang.Module("~express~serve-static")
+    @jsweet.lang.Module("serve-static")
     native public static jsweet.util.function.TriConsumer<IncomingMessage,ServerResponse,java.util.function.Function<Object,Object>> express_serve_static(String root, def.express.express_serve_static.ServeStaticOptions options);
-    @jsweet.lang.Module("~express/lib/express")
+    @jsweet.lang.Module("express")
     public static final def.express.express_lib_express.Express express_lib_express=null;
     @jsweet.lang.Module("~express/lib/router/index")
     native public static def.express.express_lib_router_index.Router express_lib_router_index();
@@ -42,7 +42,7 @@ public final class Globals {
  * The file to serve will be determined by combining req.url with the provided root directory.
  * When a file is not found, instead of sending a 404 response, this module will instead call next() to move on to the next middleware, allowing for stacking and fall-backs.
  */
-    @jsweet.lang.Module("~express~serve-static")
+    @jsweet.lang.Module("serve-static")
     native public static jsweet.util.function.TriConsumer<IncomingMessage,ServerResponse,java.util.function.Function<Object,Object>> express_serve_static(String root);
     @jsweet.lang.Module("~express~path-to-regexp")
     native public static def.express.express_path_to_regexp.PathRegExp express_path_to_regexp(def.js.RegExp path, def.express.express_path_to_regexp.Options options);
@@ -103,7 +103,7 @@ public final class Globals {
     @jsweet.lang.Module("~express/lib/router/layer")
     native public static Layer express_lib_router_layer(java.lang.String path);
     /** Create an express application. */
-    @jsweet.lang.Module("~express/lib/express")
+    @jsweet.lang.Module("express")
     native public static Application express_lib_express();
     /** This class was automatically generated for disambiguating erased method signatures. */
     @jsweet.lang.Erased
