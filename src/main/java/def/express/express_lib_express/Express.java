@@ -9,7 +9,7 @@ import def.express.express_serve_static.ServeStaticOptions;
 @jsweet.lang.Interface
 public abstract class Express extends def.js.Object {
     /** Create an express application. */
-    native public Application apply();
+    native public Application $apply();
     /** The Application prototype */
     public Application application;
     /** The Request prototype */
